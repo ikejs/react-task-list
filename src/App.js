@@ -29,8 +29,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.tasks.map((task, i) => {
-          // return <div key={i}>{task.name} {task.completed}</div>
-          return <Task key={i} name={task.name} completed={task.completed} task={task} />
+          return <Task key={i} task={task} />
         })}
       </div>
     );
@@ -38,29 +37,5 @@ class App extends Component {
 }
 
 
-
-
-
-// function App() {
-
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;

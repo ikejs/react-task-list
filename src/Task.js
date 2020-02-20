@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Task(props) {
-    return <div>{props.name}</div>
+function Task({ task }) {
+    return <div>{task.name}</div>
 }
 
 export default Task;
