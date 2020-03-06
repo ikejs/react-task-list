@@ -22,10 +22,10 @@ class Task extends Component {
             className={this.renderClassNames(completed)}>
             {this.renderName(name, completed)}
             <td
-                className="float-right col-md-12"
-                // onClick={() => {
-                //     this.props.delete(index)
-                // }}
+                className="float-right col-md-2"
+                onClick={() => {
+                    this.props.delete(index)
+                }}
             >
                 <span className="fas fa-times offset-md-10" />
             </td>

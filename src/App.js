@@ -25,7 +25,9 @@ class App extends Component {
 
   toggleCompleted(index) {
     this.setState((state) => {
-      return state.tasks[index].completed = !state.tasks[index].completed;
+      if(state.tasks[index]) {
+        return state.tasks[index].completed = !state.tasks[index].completed;
+      }
     });
   }
 
@@ -35,11 +37,11 @@ class App extends Component {
     });
   }
 
-  // delete(index) {
-  //   this.setState((state) => {
-  //     return state.tasks.splice(index);
-  //   });
-  // }
+  delete(index) {
+    this.setState((state) => {
+      return state.tasks.splice(index);
+    });
+  }
 
 
 
@@ -55,12 +57,14 @@ class App extends Component {
             <div class="input-group col-md-6 float-right">
               <form onSubmit={(e) => {
                 e.preventDefault();
+                const taskInput = document.getElementById('taskInput');
                   const task = {
-                    name: document.getElementById('taskInput').value,
+                    name: taskInput.value,
                     completed: false,
                     created: new Date()
                   }
                   this.addTask(task)
+                  taskInput.value = '';
               }}>
                 <input type="text" id="taskInput" class="form-control" placeholder="Add task" aria-label="Add task" />
               </form>
@@ -77,9 +81,9 @@ class App extends Component {
                     toggleCompleted={(index) => {
                       this.toggleCompleted(index)
                     }}
-                    // delete={(index) => {
-                    //   this.delete(index)
-                    // }}
+                    delete={(index) => {
+                      this.delete(index)
+                    }}
                   />)
               })}
             </tbody>
