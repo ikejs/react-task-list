@@ -6,31 +6,86 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-      this.state = {
-        tasks: [
-          {
-            name: "Dishes",
-            completed: false,
-            created: new Date()
-          },
-          {
-            name: "Feed the Dog",
-            completed: true,
-            created: new Date()
-          }
-        ]
-      }
 
+    this.state = {
+        tasks: []
+      }
+    
   }
+
+  componentDidMount() {
+    
+    console.log(localStorage.getItem('tasks'));
+    // if(localStorage.getItem('tasks')) {
+    //   this.setState(() => {
+    //     return JSON.parse(localStorage.getItem('tasks'))
+    //   })
+    // }
+  }
+
+  toggleCompleted(index) {
+    this.setState((state) => {
+      return state.tasks[index].completed = !state.tasks[index].completed;
+    });
+  }
+
+  addTask(task) {
+    this.setState((state) => {
+      return state.tasks.push(task);
+    });
+  }
+
+  // delete(index) {
+  //   this.setState((state) => {
+  //     return state.tasks.splice(index);
+  //   });
+  // }
+
+
 
   render() {
 
+    localStorage.setItem('tasks', this.state);
     
     return (
-      <div className="App">
-        {this.state.tasks.map((task, i) => {
-          return <Task key={i} task={task} />
-        })}
+      <div class="App">
+        <div class="col-md-8 offset-md-2 p-0 mt-4 pt-4">
+          <h2 class="text-white mt-4 pt-4">
+            Tasks
+            <div class="input-group col-md-6 float-right">
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                  const task = {
+                    name: document.getElementById('taskInput').value,
+                    completed: false,
+                    created: new Date()
+                  }
+                  this.addTask(task)
+              }}>
+                <input type="text" id="taskInput" class="form-control" placeholder="Add task" aria-label="Add task" />
+              </form>
+            </div>
+          </h2>
+          <table class="table table-dark">
+            <tbody>
+              {this.state.tasks.map((task, i) => {
+                return (
+                  <Task 
+                    key={i}
+                    task={task}
+                    index={i}
+                    toggleCompleted={(index) => {
+                      this.toggleCompleted(index)
+                    }}
+                    // delete={(index) => {
+                    //   this.delete(index)
+                    // }}
+                  />)
+              })}
+            </tbody>
+          </table>
+          
+        </div>
       </div>
     );
   }
