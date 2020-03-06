@@ -1,0 +1,6 @@
+{
+  "short_name": "Ike's Task List",
+  "name": "An amazing task list for all of your tasks.",
+  "start_url": ".",
+  "display": "standalone"
+}
