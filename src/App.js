@@ -39,7 +39,7 @@ class App extends Component {
 
   delete(index) {
     this.setState((state) => {
-      return state.tasks.splice(index);
+      return state.tasks.splice(index, 1);
     });
   }
 
